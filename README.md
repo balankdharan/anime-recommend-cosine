@@ -1,4 +1,4 @@
-# 🎌 Anime Recommendation API (WIP)
+# 🎌 Anime Recommendation
 
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green?logo=node.js)
 ![Express](https://img.shields.io/badge/Express.js-Backend-lightgrey?logo=express)
@@ -14,6 +14,8 @@ It currently reads a Kaggle dataset (`anime.csv`), performs text-based similarit
 
 ## 🧱 Project Structure
 
+```bash
+
 your-project/
 ├── backend/
 │ ├── anime.csv
@@ -25,6 +27,8 @@ your-project/
 │
 ├── .gitignore
 └── README.md
+
+```
 
 ---
 
