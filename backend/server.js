@@ -5,11 +5,15 @@ import csv from "csv-parser";
 import cosineSimilarity from "cosine-similarity";
 import Fuse from "fuse.js";
 import { fileURLToPath } from "url";
+import cors from "cors";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+app.use(cors({ origin: "http://localhost:5173" }));
+
 app.use(express.json());
 
 let animeData = [];
@@ -80,7 +84,7 @@ app.get("/api/recommendations", (req, res) => {
   const baseTitle = matchedAnime.name
     .replace(
       /\s*(movie|film|ova|ona|special|episode|recap|season|tv|picture drama)\s*\d*\s*[:\-]?.*/gi,
-      ""
+      "",
     )
     .trim()
     .toLowerCase();
@@ -97,7 +101,7 @@ app.get("/api/recommendations", (req, res) => {
         const candidateBase = a.name
           .replace(
             /\s*(movie|film|ova|ona|special|episode|recap|season|tv|picture drama)\s*\d*\s*[:\-]?.*/gi,
-            ""
+            "",
           )
           .trim()
           .toLowerCase();
@@ -151,5 +155,5 @@ app.get("/api/recommendations", (req, res) => {
 
 const PORT = 4000;
 app.listen(PORT, () =>
-  console.log(`🚀 Server running at http://localhost:${PORT}`)
+  console.log(`🚀 Server running at http://localhost:${PORT}`),
 );
