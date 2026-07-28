@@ -2,32 +2,38 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-20.x-green?logo=node.js)
 ![Express](https://img.shields.io/badge/Express.js-Backend-lightgrey?logo=express)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?logo=vite)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ESM-yellow?logo=javascript)
 ![Kaggle Dataset](https://img.shields.io/badge/Data-Kaggle-blue?logo=kaggle)
-![Docker](https://img.shields.io/badge/Docker-Soon-blue?logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-purple)
 
-This project is a **Node.js + Express** backend that recommends anime titles using **fuzzy search** and **cosine similarity** based on genres.  
-It currently reads a Kaggle dataset (`anime.csv`), performs text-based similarity checks, and returns top matching anime recommendations via a REST API.
+This project recommends anime titles using **fuzzy search** and **cosine similarity** based on genres. It has two parts:
+
+- **`backend/`** — a Node.js + Express API that reads a Kaggle dataset (`anime.csv`), performs fuzzy title matching and genre-based cosine similarity, and returns recommendations.
+- **`frontend/`** — a Vite + React app that lets you search for an anime and view its recommendations.
+
+![App screenshot](./image.png)
 
 ---
 
 ## 🧱 Project Structure
 
 ```bash
-
-your-project/
+anime-recommend-cosine/
 ├── backend/
 │ ├── anime.csv
 │ ├── server.js
 │ ├── package.json
 │ └── ...other backend files
 │
-├── frontend/ ← (to be added later)
+├── frontend/
+│ ├── src/
+│ ├── index.html
+│ └── package.json
 │
-├── .gitignore
+├── LICENSE
 └── README.md
-
 ```
 
 ---
@@ -38,43 +44,44 @@ your-project/
 - Cleans and normalizes genre and title data
 - Uses **Fuse.js** for fuzzy text search
 - Uses **cosine similarity** for genre-based recommendations
-- Simple REST API endpoint: `/api/recommendations?anime=onepiece`
+- REST API endpoint: `/api/recommendations?anime=<title>&type=<optional>`
+- React frontend to search titles and browse ranked recommendations
 
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/anime-recommendation-api.git
-cd anime-recommendation-api
+git clone https://github.com/username/anime-recommend-cosine.git
+cd anime-recommend-cosine
 ```
 
-### 2️⃣ Move into backend
+### 2️⃣ Run the backend
 
 ```bash
 cd backend
-```
-
-### 3️⃣ Install dependencies
-
-```bash
 npm install
-```
-
-### 4️⃣ Run the server
-
-```bash
 node server.js
 ```
 
-The server will start on:
+The backend starts on `http://localhost:4000`.
 
-- http://localhost:4000
+### 3️⃣ Run the frontend
+
+In a separate terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend starts on `http://localhost:5173` (the backend only allows CORS requests from this origin).
 
 ## 📦 Dataset
 
-The backend loads anime details from a Kaggle dataset (anime.csv).
-Make sure the file is located inside the backend/ folder.
+The backend loads anime details from a Kaggle dataset (`anime.csv`).
+Make sure the file is located inside the `backend/` folder.
 
 ### Expected Columns:
 
@@ -82,42 +89,17 @@ Make sure the file is located inside the backend/ folder.
 title, synopsis, genres, episodes, score, characters
 ```
 
-### 🧭 Roadmap
+## 🧭 Roadmap
 
-```bash
-✅ Current
+**✅ Current**
+- Fuzzy search + cosine similarity recommendations
+- CSV dataset loading
+- Express API route `/api/recommendations`
+- React frontend for search and results
 
-Basic fuzzy search + cosine similarity
-
-CSV dataset loading
-
-Express API route /api/recommendations
-
-🛠️ Planned
-
-Add modular route structure
-
-Implement caching (Redis or in-memory)
-
-Add Docker support for easier deployment
-
-Integrate AI-based embedding similarity
-
-Build frontend with React (MERN integration)
-
-Add proper documentation and testing
-
-```
-
-### 🤝 Contributing
-
-Contributions are welcome once the base structure is ready.
-To propose changes:
-
-Fork the repo
-
-Create a feature branch
-
-Commit changes
-
-Submit a pull request
+**🛠️ Planned**
+- Add modular route structure
+- Implement caching (Redis or in-memory)
+- Add Docker support for easier deployment
+- Integrate AI-based embedding similarity
+- Add proper documentation and testing
